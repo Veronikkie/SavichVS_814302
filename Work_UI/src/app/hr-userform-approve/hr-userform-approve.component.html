@@ -1,0 +1,36 @@
+<app-hr-nav>
+  <mat-card class="form-card center">
+    <h1>Одобренные резюме</h1>
+    <div class="form-outline">
+      <input class="form-control" type="search" [(ngModel)]="queryString" id="search" placeholder="Поиск по вакансии">
+
+    </div>
+    <table class="table table-striped" matSort (matSortChange)="sortData($event)">
+      <thead>
+        <tr>
+          <td mat-sort-header="Surname">Имя</td>
+          <td mat-sort-header="Date">Дата рождения</td>
+          <td mat-sort-header="Phone">Телефон</td>
+          <td mat-sort-header="Position">Вакансия</td>
+          <td mat-sort-header="Status">Статус</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of sortedData | HrFilterPipe: queryString">
+          <td>{{user.Surname}} {{user.Name}} {{user.Patronymic}}</td>
+          <td>{{user.Date | dateFormatPipe}}</td>
+          <td>{{user.Phone}}</td>
+          <td>{{user.Position}}</td>
+          <td>{{user.Status}}</td>
+
+          <td style="width:125px">
+            <input type="button" value="Резюме" (click)="fullInfo(user)" class="btn btn-primary" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </mat-card>
+</app-hr-nav>

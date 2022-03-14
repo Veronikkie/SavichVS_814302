@@ -1,0 +1,68 @@
+<app-hr-nav>
+  <mat-card class="form-card center" *ngIf="addQuestion">
+    <mat-card-header>
+      <mat-card-title>Новый вопрос</mat-card-title>
+    </mat-card-header>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)"
+                 size="medium"
+                 color="#ffffff"
+                 type="line-spin-fade">
+    </ngx-spinner>
+
+    <form class="form ng-pristine ng-untouched ng-valid" #newForm="ngForm" novalidate="">
+
+      <div class="form-group">
+
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Вопрос" [(ngModel)]="newQuestion.Question" name="Question" required></textarea>
+        </mat-form-field>
+
+      </div>
+
+      <div style="display:inline-block">
+        <button mat-raised-button color="primary" [disabled]="!newForm.valid" (click)="AddQuestion()">Добавить вопрос</button>
+      </div>
+
+    </form>
+  </mat-card>
+  <mat-card class="form-card center">
+    <h1>Просмотренные резюме</h1>
+    <div class="form-outline">
+      <input class="form-control" type="search" [(ngModel)]="queryString" id="search" placeholder="Поиск по вакансии">
+
+    </div>
+    <table class="table table-striped" matSort (matSortChange)="sortData($event)">
+      <thead>
+        <tr>
+          <td mat-sort-header="Surname">Имя</td>
+          <td mat-sort-header="Date">Дата рождения</td>
+          <td mat-sort-header="Phone">Телефон</td>
+          <td mat-sort-header="Position">Вакансия</td>
+          <td mat-sort-header="Status">Статус</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of sortedData | HrFilterPipe: queryString">
+          <td>{{user.Surname}} {{user.Name}} {{user.Patronymic}}</td>
+          <td>{{user.Date | dateFormatPipe}}</td>
+          <td>{{user.Phone}}</td>
+          <td>{{user.Position}}</td>
+          <td>{{user.Status}}</td>
+
+          <td style="width:125px">
+            <input type="button" value="Резюме" (click)="fullInfo(user)" class="btn btn-primary" />
+
+            <input type="button" value="Вопрос" (click)="question(user.Id)" class="btn btn-primary" />
+
+            <input type="button" value="Одобрить" (click)="approve(user.Id)" class="btn btn-success" />
+
+            <input type="button" value="Отклонить" (click)="reject(user.Id)" class="btn btn-danger" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </mat-card>
+</app-hr-nav>

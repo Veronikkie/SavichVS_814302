@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\home",
+    "\\src\\app\\main-nav",
+    "\\src\\app\\main-page",
+    "\\src\\app\\user",
+    "\\src\\app\\user-form",
+    "\\src\\app\\user-form\\service",
+    "\\src\\app\\user-status",
+    "\\src\\app\\user\\sing-in"
+  ],
+  "SelectedNode": "\\src\\app\\main-page\\main-page.component.css",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,275 @@
+<app-main-nav>
+  <mat-card class="form-card center">
+    <mat-card-header>
+      <mat-card-title>Личные данные</mat-card-title>
+    </mat-card-header>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)"
+                 size="medium"
+                 color="#ffffff"
+                 type="line-spin-fade">
+    </ngx-spinner>
+
+    <form class="form ng-pristine ng-untouched ng-valid" #newForm="ngForm" novalidate="">
+
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Имя" [(ngModel)]="info.Name" name="Name" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Отчество" [(ngModel)]="info.Patronymic" name="Patronymic" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Фамилия" [(ngModel)]="info.Surname" name="Surname" required>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Дата рождения" [matDatepicker]="date" [(ngModel)]="info.Date" name="Date" disabled>
+          <mat-datepicker-toggle matPrefix [for]="date"></mat-datepicker-toggle>
+          <mat-datepicker #date [disabled]="info.Name == null"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Адрес" [(ngModel)]="info.Adress" name="Adress" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Телефон" [(ngModel)]="info.Phone" name="Phone" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Email" [(ngModel)]="info.Email" name="Email" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Вакансия" [(ngModel)]="info.Position" name="Position" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Ожидаемая заработная плата во время испытательного срока ($)" [(ngModel)]="info.MinSalary" name="MinSalary" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Ожидаемая заработная плата после испытательного срока ($)" [(ngModel)]="info.MaxSalary" name="MaxSalary" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <h5>Образование</h5>
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Образование" [(ngModel)]="educationInfo.Education" name="Education" #education="ngModel">
+            <mat-option value="Higher education">Высшее образование</mat-option>
+            <mat-option value="Incomplete higher education">Неоконченное высшее</mat-option>
+            <mat-option value="Secondary education">Общее среднее</mat-option>
+            <mat-option value="Secondary special education">Среднее специальное</mat-option>
+            <mat-option value="Incomplete secondary specialized education">Неоконченное среднее специальное</mat-option>
+            <mat-option value="Retraining">Курсы переподготовки</mat-option>
+            <mat-option value="Vocational education">Профессионально-техническое образование</mat-option>
+          </mat-select>
+          <div [hidden]="education.valid || education.untouched" class="alert alert-danger">
+            Education not selected
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Учреждение образования" [(ngModel)]="educationInfo.Institution" name="Institution" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Тип обучения" [(ngModel)]="educationInfo.EducationType" name="EducationType" #educationtype="ngModel">
+            <mat-option value="Daytime">Дневное</mat-option>
+            <mat-option value="Evening">Вечернее</mat-option>
+            <mat-option value="Distance learning">Дистанционное обучение</mat-option>
+          </mat-select>
+          <div [hidden]="educationtype.valid || educationtype.untouched" class="alert alert-danger">
+            Тип обучения не выбран
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Факультет (если релевантно)" [(ngModel)]="educationInfo.Faculty" name="Faculty" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Специальность (если релевантно)" [(ngModel)]="educationInfo.Speciality" name="Speciality" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Год окончания" [(ngModel)]="educationInfo.End" name="End" required pattern="[0-9]{4}">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Дополнительное образование и сертификаты" [(ngModel)]="educationInfo.AnotherInfo" name="AnotherInfo"></textarea>
+        </mat-form-field>
+
+      </div>
+
+      <div class="form-group">
+
+        <h5>Уровень иностранного языка</h5>
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Английский" [(ngModel)]="language.English" name="English" #english="ngModel">
+            <mat-option value="---">---</mat-option>
+            <mat-option value="Novice">Начинающий</mat-option>
+            <mat-option value="Basic">А1</mat-option>
+            <mat-option value="Pre-Intermediate">А2</mat-option>
+            <mat-option value="Intermediate">В1</mat-option>
+            <mat-option value="Upper-Intermediate">В2</mat-option>
+            <mat-option value="Advanced">С1/С2</mat-option>
+          </mat-select>
+          <div [hidden]="english.valid || english.untouched" class="alert alert-danger">
+            Английский не выбран
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Немецкий" [(ngModel)]="language.German" name="German" #german="ngModel">
+            <mat-option value="---">---</mat-option>
+            <mat-option value="Novice">Начинающий</mat-option>
+            <mat-option value="Basic">А1</mat-option>
+            <mat-option value="Pre-Intermediate">А2</mat-option>
+            <mat-option value="Intermediate">В1</mat-option>
+            <mat-option value="Upper-Intermediate">В2</mat-option>
+            <mat-option value="Advanced">С1/С2</mat-option>
+          </mat-select>
+          <div [hidden]="german.valid || german.untouched" class="alert alert-danger">
+            Немецкий не выбран
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Французский" [(ngModel)]="language.French" name="French" #french="ngModel">
+            <mat-option value="---">---</mat-option>
+            <mat-option value="Novice">Начинающий</mat-option>
+            <mat-option value="Basic">А1</mat-option>
+            <mat-option value="Pre-Intermediate">А2</mat-option>
+            <mat-option value="Intermediate">В1</mat-option>
+            <mat-option value="Upper-Intermediate">В2</mat-option>
+            <mat-option value="Advanced">С1/С2</mat-option>
+          </mat-select>
+          <div [hidden]="french.valid || french.untouched" class="alert alert-danger">
+            Французский не выбран
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Испанский" [(ngModel)]="language.Spanish" name="Spanish" #spanish="ngModel">
+            <mat-option value="---">---</mat-option>
+            <mat-option value="Novice">Начинающий</mat-option>
+            <mat-option value="Basic">А1</mat-option>
+            <mat-option value="Pre-Intermediate">А2</mat-option>
+            <mat-option value="Intermediate">В1</mat-option>
+            <mat-option value="Upper-Intermediate">В2</mat-option>
+            <mat-option value="Advanced">С1/С2</mat-option>
+          </mat-select>
+          <div [hidden]="spanish.valid || spanish.untouched" class="alert alert-danger">
+            Испанский не выбран
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Китайский" [(ngModel)]="language.Chinese" name="Chinese" #chinese="ngModel">
+            <mat-option value="---">---</mat-option>
+            <mat-option value="Novice">Начинающий</mat-option>
+            <mat-option value="Basic">А1</mat-option>
+            <mat-option value="Pre-Intermediate">А2</mat-option>
+            <mat-option value="Intermediate">В1</mat-option>
+            <mat-option value="Upper-Intermediate">В2</mat-option>
+            <mat-option value="Advanced">С1/С2</mat-option>
+          </mat-select>
+          <div [hidden]="chinese.valid || chinese.untouched" class="alert alert-danger">
+            Китайский не выбран
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Арабский" [(ngModel)]="language.Arab" name="Arab" #arab="ngModel">
+            <mat-option value="---">---</mat-option>
+            <mat-option value="Novice">Начинающий</mat-option>
+            <mat-option value="Basic">А1</mat-option>
+            <mat-option value="Pre-Intermediate">А2</mat-option>
+            <mat-option value="Intermediate">В1</mat-option>
+            <mat-option value="Upper-Intermediate">В2</mat-option>
+            <mat-option value="Advanced">С1/С2</mat-option>
+          </mat-select>
+          <div [hidden]="arab.valid || arab.untouched" class="alert alert-danger">
+            Арабский не выбран
+          </div>
+        </mat-form-field>
+
+      </div>
+
+      <div class="form-group">
+        <h5>Опыт в IT</h5>
+
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Опишите Ваш опыт в IT" [(ngModel)]="experience.Experience" name="Experience" required></textarea>
+        </mat-form-field>
+
+      </div>
+      <div>
+        <file-drop headertext="Переместите свои файлы портфолио сюда" (onFileDrop)="dropped($event)"></file-drop>
+        <mat-list>
+          <h3 mat-subheader>Добавленные файы</h3>
+          <mat-list-item *ngFor="let item of files">
+            <mat-icon mat-list-icon>attachment</mat-icon>
+            <h4 mat-line>{{item.relativePath}}</h4>
+            <button mat-button type="button" *ngIf="item.relativePath" matSuffix mat-icon-button aria-label="Clear" (click)="deleteFileItem(item)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div style="display:inline-block">
+        <button mat-raised-button color="primary" [disabled]="!newForm.valid" (click)="OnSubmit()">Сохранить резюме</button>
+      </div>
+
+    </form>
+
+    <form class="form ng-pristine ng-untouched ng-valid" #progForm="ngForm" novalidate="">
+
+
+      <div class="form-group">
+
+        <h5 style="margin-top:30px">Языки программирования</h5>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Языки программирования" name="ProgLangId" [(ngModel)]="userProgLang.ProgLangId" #proglangid="ngModel" required>
+            <mat-option *ngFor="let userProgLangs of progLang" [value]="userProgLangs.Id">
+              {{userProgLangs.ProgLang}}
+            </mat-option>
+          </mat-select>
+          <div [hidden]="proglangid.valid || proglangid.untouched" class="alert alert-danger">
+            Языки программирования не выбраны
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Уровень владения языком программирования" [(ngModel)]="userProgLang.Level" name="Level" #level="ngModel">
+            <mat-option value="---">---</mat-option>
+            <mat-option value="Basic">Базовый</mat-option>
+            <mat-option value="Confident possession">Уверенный</mat-option>
+            <mat-option value="Expert">Эксперт</mat-option>>
+          </mat-select>
+          <div [hidden]="level.valid || level.untouched" class="alert alert-danger">
+            Уровень владения языком программирования не выбран
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Лет изучения" [(ngModel)]="userProgLang.Period" name="Period" required pattern="[0-9]">
+        </mat-form-field>
+
+      </div>
+
+
+      <div style="display:inline-block">
+        <button mat-raised-button color="primary" (click)="AddProg()">Сохранить</button>
+      </div>
+
+    </form>
+  </mat-card>
+</app-main-nav>

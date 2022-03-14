@@ -1,0 +1,34 @@
+<app-hr-nav>
+  <mat-card class="form-card center">
+    <form #proglangForm="ngForm" class="form-card ">
+      <mat-form-field class="input-width">
+        <input matInput #ProgLang ngModel name="ProgLang" placeholder="Языки программирования" value="" required>
+      </mat-form-field>
+
+
+      <div style="display:inline-block">
+        <button mat-raised-button color="primary" [disabled]="!proglangForm.valid" (click)="OnSubmit(ProgLang.value)">
+          Добавить язык программирования
+        </button>
+      </div>
+
+    </form>
+    <h1>Языки программирования</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Id</td>
+          <td>Языки программирования</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of proglang">
+          <td>{{item.Id}}</td>
+          <td>{{item.ProgLang}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </mat-card>
+</app-hr-nav>

@@ -1,0 +1,80 @@
+<app-main-nav>
+  <mat-card class="form-card center" *ngIf="addQuestion">
+    <div class="info">
+      <h4 style="font-style:italic; text-align:center">Вопросы</h4>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td>Вопрос</td>
+            <td>Ответ</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let question of questions">
+            <td>{{question.Question}}</td>
+            <td>{{question.Answer}}</td>
+
+            <td style="width:125px">
+
+              <input *ngIf="question.Answer == ''" type="button" value="Ответить" (click)="add(question)" class="btn btn-primary" />
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <form class="form ng-pristine ng-untouched ng-valid" #newForm="ngForm" novalidate="" *ngIf="addAnswer">
+
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Вопрос" [(ngModel)]="newQuestion.Question" name="Question" disabled></textarea>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Ответ" [(ngModel)]="newQuestion.Answer" name="Answer" required></textarea>
+        </mat-form-field>
+
+      </div>
+
+      <div style="display:inline-block">
+        <button mat-raised-button color="primary" [disabled]="!newForm.valid" (click)="AddAnswer()">Ответить на вопрос</button>
+      </div>
+
+    </form>
+  </mat-card>
+  <mat-card class="form-card center">
+    <h1>Статусы отправленных резюме</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Имя</td>
+          <td>Дата рождения</td>
+          <td>Телефон</td>
+          <td>Вакансия</td>
+          <td>Статус</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.Name}} {{user.Patronymic}} {{user.Surname}}</td>
+          <td>{{user.Date | dateFormatPipe}}</td>
+          <td>{{user.Phone}}</td>
+          <td>{{user.Position}}</td>
+          <td>{{user.Status}}</td>
+ 
+
+          <td style="width:150px">
+
+            <input type="button" value="Вопросы" (click)="question(user.Id)" class="btn btn-dark" />
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+  </mat-card>
+</app-main-nav>

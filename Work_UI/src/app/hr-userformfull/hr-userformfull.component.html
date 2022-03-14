@@ -1,0 +1,65 @@
+<app-hr-nav>
+  <mat-card class="form-card center" *ngIf="personalInfo && educationInfo && languageInfo && experienceInfo && userProgLangInfo">
+    <h2>Резюме</h2>
+
+    <div class="info">
+      <h4 style="font-style:italic; text-align:center">{{personalInfo.Surname}} {{personalInfo.Name}} {{personalInfo.Patronymic}}</h4>
+      <p>Дата рождения: <span style="font-weight:500; font-style:italic">{{personalInfo.Date | dateFormatPipe}}</span></p>
+      <p>Адрес: <span style="font-weight:500; font-style:italic">{{personalInfo.Adress}}</span></p>
+      <p>Телефон: <span style="font-weight:500; font-style:italic">{{personalInfo.Phone}}</span></p>
+      <p>Email: <span style="font-weight:500; font-style:italic">{{personalInfo.Email}}</span></p>
+      <p>Вакансия: <span style="font-weight:500; font-style:italic">{{personalInfo.Position}}</span></p>
+      <p>Ожидаемая заработная плата во время испытательного срока ($): <span style="font-weight:500; font-style:italic">{{personalInfo.MinSalary}}$</span></p>
+      <p>Ожидаемая заработная плата после испытательного срока ($): <span style="font-weight:500; font-style:italic">{{personalInfo.MaxSalary}}$</span></p>
+
+      <h4 style="font-style:italic; text-align:center">Образование</h4>
+      <p>Образование: <span style="font-weight:500; font-style:italic">{{educationInfo.Education}}</span></p>
+      <p>Tип образования: <span style="font-weight:500; font-style:italic">{{educationInfo.EducationType}}</span></p>
+      <p>Учреждение образования: <span style="font-weight:500; font-style:italic">{{educationInfo.Institution}}</span></p>
+      <p>Факультет (если релевантно): <span style="font-weight:500; font-style:italic">{{educationInfo.Faculty}}</span></p>
+      <p>Специальность (если релевантно): <span style="font-weight:500; font-style:italic">{{educationInfo.Speciality}}</span></p>
+      <p>Год окончания: <span style="font-weight:500; font-style:italic">{{educationInfo.End}} год</span></p>
+      <p>Дополнительное образование и сертификаты: <span style="font-weight:500; font-style:italic">{{educationInfo.AnotherInfo}}</span></p>
+
+      <h4 style="font-style:italic; text-align:center">Знание иностранного языка</h4>
+      <p>Английский: <span style="font-weight:500; font-style:italic">{{languageInfo.English}}</span></p>
+      <p>Немецкий: <span style="font-weight:500; font-style:italic">{{languageInfo.German}}</span></p>
+      <p>Французский: <span style="font-weight:500; font-style:italic">{{languageInfo.French}}</span></p>
+      <p>Испанский: <span style="font-weight:500; font-style:italic">{{languageInfo.Spanish}}</span></p>
+      <p>Китайский: <span style="font-weight:500; font-style:italic">{{languageInfo.Chinese}}</span></p>
+      <p>Арабский: <span style="font-weight:500; font-style:italic">{{languageInfo.Arab}}</span></p>
+
+      <h4 style="font-style:italic; text-align:center">Опыт в IT</h4>
+      <p style="font-weight:500; font-style:italic" *ngIf="experienceInfo.Experience == ''">Нет опыта</p>
+      <p style="font-weight:500; font-style:italic">{{experienceInfo.Experience}}</p>
+
+      <h4 style="font-style:italic; text-align:center">Знание языков программирования</h4>
+      <div *ngFor="let item of userProgLangInfo" class="table-striped">
+        <p>Язык программирования: <span style="font-weight:500; font-style:italic">{{item.ProgLangName}}</span> </p>
+        <p>Уровень владения: <span style="font-weight:500; font-style:italic">{{item.Level}}</span> </p>
+        <p>Лет использования: <span style="font-weight:500; font-style:italic">{{item.Period}} лет</span></p>
+
+      </div>
+    </div>
+    <div class="info">
+      <h4 style="font-style:italic; text-align:center">Документы</h4>
+      <mat-list>
+        <mat-list-item *ngFor="let item of textInfo; let i = index">
+          <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+          <h4 mat-line>{{item.Name}}</h4>
+          <button matTooltip="Download" mat-icon-button (click)="downloadTextById(item.Id)">
+            <mat-icon>get_app</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="info">
+      <h4 style="font-style:italic; text-align:center">Вопросы</h4>
+      <div *ngFor="let item of question" class="table-striped">
+        <p>Вопрос: <span style="font-weight:500; font-style:italic">{{item.Question}}</span> </p>
+        <p>Ответ: <span style="font-weight:500; font-style:italic">{{item.Answer}}</span> </p>
+
+      </div>
+    </div>
+  </mat-card>
+</app-hr-nav>
